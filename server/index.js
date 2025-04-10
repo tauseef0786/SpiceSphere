@@ -12,7 +12,13 @@ const app=express();
 app.use(express.json());
 connectDB();
 
+
 app.use(cors());
+
+app.get("/", (req, res) => {
+    res.send("Welcome to the Recipe API");
+});
+
   
 app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);
