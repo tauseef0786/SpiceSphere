@@ -7,10 +7,10 @@ const Login = () => {
 
   const handleLogin = async (data) => {
     try {
-      const res = await apiClient.post("/login", data);
+      const res = await apiClient.post("/auth/login", data);
       localStorage.setItem("token", res.data.token);
       alert("Login successful!");
-      navigate("/dashboard"); // or wherever you want to go
+      navigate("/"); 
     } catch (err) {
       alert(err?.response?.data?.message || "Login failed!");
     }

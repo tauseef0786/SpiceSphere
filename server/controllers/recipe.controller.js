@@ -24,6 +24,19 @@ export const createRecipe = async (req, res) => {
   }
 };
 
+// controllers/recipeController.js
+export const getMyRecipes = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const myRecipes = await Recipe.find({ createdBy: userId });
+    res.status(200).json(myRecipes);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching your recipes", error });
+  }
+};
+
+
+
 // Get all recipes
 export const getAllRecipes = async (req, res) => {
   try {
