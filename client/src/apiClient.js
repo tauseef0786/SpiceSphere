@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = "http://localhost:3030/api/"; // api link 
+const baseUrl = "https://spice-sphere.vercel.app/api/"; // api link 
  
 export const apiClient = axios.create({
     baseURL: baseUrl,
