@@ -1,74 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { apiClient } from "../apiClient";
-
-// const RecipeDetails = () => {
-//   const { id } = useParams();
-//   const [recipe, setRecipe] = useState(null);
-
-//   const fetchRecipe = async () => {
-//     try {
-//       const res = await apiClient.get(`/recipes/${id}`);
-//       setRecipe(res.data);
-//     } catch (err) {
-//       console.error("Error fetching recipe details:", err);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchRecipe();
-//   }, [id]);
-
-//   if (!recipe) {
-//     return <div className="text-center mt-10">Loading...</div>;
-//   }
-
-//   return (
-//     <div className="max-w-4xl mx-auto p-6">
-//       <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
-//       <img
-//         src={recipe.image}
-//         alt={recipe.title}
-//         className="w-full h-64 object-cover rounded-lg mb-4"
-//       />
-//       <p className="text-lg text-gray-700 mb-2">
-//         <strong>Category:</strong> {recipe.category}
-//       </p>
-//       <p className="text-lg text-gray-700 mb-4">
-//         <strong>Total Calories:</strong> {recipe.totalCalories} kcal
-//       </p>
-
-//       <div className="grid grid-cols-2 gap-4 mb-6">
-//         <div>
-//           <h2 className="text-xl font-semibold mb-2">Nutrients</h2>
-//           <ul className="text-gray-600">
-//             <li>Protein: {recipe.nutrients.protein}g</li>
-//             <li>Carbs: {recipe.nutrients.carbs}g</li>
-//             <li>Fat: {recipe.nutrients.fat}g</li>
-//             <li>Fiber: {recipe.nutrients.fiber}g</li>
-//           </ul>
-//         </div>
-//         <div>
-//           <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
-//           <ul className="text-gray-600 list-disc list-inside">
-//             {recipe.ingredients.map((item, index) => (
-//               <li key={index}>{item}</li>
-//             ))}
-//           </ul>
-//         </div>
-//       </div>
-
-//       <div>
-//         <h2 className="text-xl font-semibold mb-2">Instructions</h2>
-//         <p className="whitespace-pre-line text-gray-700">{recipe.instructions}</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default RecipeDetails;
-
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiClient } from "../apiClient";
@@ -121,26 +50,28 @@ const RecipeDetails = () => {
           <strong>Total Calories:</strong> {recipe.totalCalories} kcal
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Nutrients</h2>
-            <ul className="text-gray-700">
-              <li>Protein: {recipe.nutrients.protein}g</li>
-              <li>Carbs: {recipe.nutrients.carbs}g</li>
-              <li>Fat: {recipe.nutrients.fat}g</li>
-              <li>Fiber: {recipe.nutrients.fiber}g</li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
-            <ul className="text-gray-700 list-disc list-inside">
-              {recipe.ingredients.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
+        {/* Ingredients First (2-column layout) */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-gray-700 list-disc list-inside">
+            {recipe.ingredients.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
         </div>
 
+        {/* Nutrients Next */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-2">Nutrients</h2>
+          <ul className="text-gray-700">
+            <li>Protein: {recipe.nutrients.protein}g</li>
+            <li>Carbs: {recipe.nutrients.carbs}g</li>
+            <li>Fat: {recipe.nutrients.fat}g</li>
+            <li>Fiber: {recipe.nutrients.fiber}g</li>
+          </ul>
+        </div>
+
+        {/* Instructions Last */}
         <div>
           <h2 className="text-xl font-semibold mb-2">Instructions</h2>
           <p className="whitespace-pre-line text-gray-800">{recipe.instructions}</p>

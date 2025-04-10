@@ -7,7 +7,7 @@ const Register = () => {
 
   const handleRegister = async (data) => {
     try {
-      await apiClient.post("/register", data);
+      await apiClient.post("/auth/register", data);
       alert("Registration successful!");
       navigate("/login");
     } catch (err) {

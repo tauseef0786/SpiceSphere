@@ -1,6 +1,6 @@
 import express from "express";
 import { 
-  createRecipe, getAllRecipes, getRecipeById, updateRecipe, deleteRecipe, likeRecipe, unlikeRecipe 
+  createRecipe, getAllRecipes, getRecipeById, updateRecipe, deleteRecipe, likeRecipe, unlikeRecipe ,  getMyRecipes
 } from "../controllers/recipe.controller.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 
@@ -8,6 +8,9 @@ const router = express.Router();
 
 router.post("/", authMiddleware, createRecipe); // Create recipe
 router.get("/", getAllRecipes); // Get all recipes
+
+router.get("/my-recipes", authMiddleware, getMyRecipes); 
+
 router.get("/:id", getRecipeById); // Get single recipe
 router.put("/:id", authMiddleware, updateRecipe); // Update recipe (only owner/admin)
 router.delete("/:id", authMiddleware, deleteRecipe); // Delete recipe (only owner/admin)
