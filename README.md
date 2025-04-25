@@ -1,1 +1,75 @@
-# food-_recipes
+# SpiceSphere
+SpiceSphere is a full-stack web application designed to bring food lovers and home chefs together. Users can share, discover, and explore a wide variety of recipes from around the world. The platform allows users to:
+
+👨‍🍳 Register/Login securely using JWT authentication
+
+📋 Add new recipes with categories, ingredients, and preparation steps
+
+🍽️ View all recipes or filter them based on categories
+
+🔍 See recipe details including image, description, and contributor
+
+❤️ View My Dishes — recipes uploaded by the logged-in user
+
+🛡️ Private routes for authenticated features
+
+🌐 Fully responsive UI with dynamic backgrounds and elegant layout
+
+SpiceSphere/
+│
+├── client/                         # Frontend (React + Vite)
+│   ├── public/                     # Static files
+│   ├── src/
+│   │   ├── assets/                 # Images, icons, etc.
+│   │   ├── components/             # Reusable components
+│   │   │   ├── AddRecipe.jsx
+│   │   │   ├── AuthForm.jsx
+│   │   │   ├── Banner.jsx
+│   │   │   ├── CategoryList.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── MyDishes.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── PrivateRoute.jsx
+│   │   │   └── RecipeCard.jsx
+│   │   ├── pages/                  # Page-level components
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── RecipeDetails.jsx
+│   │   │   ├── Recipes.jsx
+│   │   │   └── Register.jsx
+│   │   ├── apiClient.js            # API handler
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── .gitignore
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   ├── vercel.json
+│   └── README.md
+│
+├── server/                         # Backend (Node.js + Express)
+│   ├── config/
+│   │   └── db.js                   # MongoDB connection
+│   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   └── recipe.controller.js
+│   ├── middleware/
+│   │   └── auth.middleware.js      # JWT middleware
+│   ├── models/
+│   │   ├── comment.model.js
+│   │   ├── recipe.model.js
+│   │   └── user.model.js
+│   ├── routes/
+│   │   ├── auth.routes.js
+│   │   └── recipe.routes.js
+│   ├── .env
+│   ├── .gitignore
+│   ├── index.js                    # Entry point
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vercel.json
+│
+└── README.md                       # Main README
