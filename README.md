@@ -1,4 +1,12 @@
 # SpiceSphere
+
+### 🔐 Demo Credentials
+
+Use the following credentials to log in and explore the application:
+
+- 📧 **Email**: `test1@gmail.com`  
+- 🔑 **Password**: `123456`
+
 SpiceSphere is a full-stack web application designed to bring food lovers and home chefs together. Users can share, discover, and explore a wide variety of recipes from around the world. The platform allows users to:
 
 👨‍🍳 Register/Login securely using JWT authentication
