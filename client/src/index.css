@@ -1,1 +1,61 @@
 @import "tailwindcss";
+/* Circular Loader with Colorful Animation */
+/* Circular Loader with Colorful Animation */
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loader {
+    border: 8px solid #f3f3f3; /* Light background */
+    border-top: 8px solid #3498db; /* Blue color for the spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite, colorChange 1.5s infinite ease-in-out;
+  }
+  
+  @keyframes colorChange {
+    0% {
+      border-top-color: #3498db;
+    }
+    25% {
+      border-top-color: #f39c12;
+    }
+    50% {
+      border-top-color: #e74c3c;
+    }
+    75% {
+      border-top-color: #2ecc71;
+    }
+    100% {
+      border-top-color: #3498db;
+    }
+  }
+  
+  /* Center the loader in the middle of the screen */
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Slight dark background */
+    z-index: 50; /* Ensure it's on top */
+  }
+  
+  .loader-text {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  

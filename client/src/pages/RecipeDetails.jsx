@@ -5,6 +5,7 @@ import { apiClient } from "../apiClient";
 const RecipeDetails = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchRecipe = async () => {
     try {
@@ -12,6 +13,8 @@ const RecipeDetails = () => {
       setRecipe(res.data);
     } catch (err) {
       console.error("Error fetching recipe details:", err);
+    } finally {
+      setLoading(false); // Set loading to false when data is fetched
     }
   };
 
@@ -19,8 +22,18 @@ const RecipeDetails = () => {
     fetchRecipe();
   }, [id]);
 
+  if (loading) {
+    return (
+      <div className="loader-container">
+        {/* Circular Loader */}
+        <div className="loader"></div>
+        <p className="loader-text">Loading recipe details...</p>
+      </div>
+    );
+  }
+
   if (!recipe) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return <div className="text-center mt-10">Failed to load recipe details</div>;
   }
 
   return (
@@ -41,7 +54,7 @@ const RecipeDetails = () => {
         <img
           src={recipe.image}
           alt={recipe.title}
-          className="w-200 h-96 object-cover rounded-lg mb-4"
+          className="w-full h-96 object-cover rounded-lg mb-4"
         />
         <p className="text-lg text-gray-700 mb-2">
           <strong>Category:</strong> {recipe.category}
