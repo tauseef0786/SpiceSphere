@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "../apiClient";
 import { useNavigate } from "react-router-dom";
+import { FaEdit, FaTrashAlt } from "react-icons/fa"; // Importing React Icons
 
 const MyDishes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -45,7 +46,6 @@ const MyDishes = () => {
   };
 
   const handleEditClick = (recipe) => {
-    // Convert ingredients array to string for editing
     const editableRecipe = {
       ...recipe,
       ingredients: Array.isArray(recipe.ingredients)
@@ -151,22 +151,26 @@ const MyDishes = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-center mb-8">🍽️ My Dishes</h2>
+    <div className="max-w-5xl mx-auto px-4 py-8 bg-gradient-to-b from-white via-gray-50 to-gray-100 rounded-xl shadow-lg">
+      <h2 className="text-4xl font-extrabold text-center text-green-800 mb-8 tracking-tight">
+        🍽️ My Dishes
+      </h2>
 
       {/* Edit Modal */}
       {editingRecipe && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl">
-            <h3 className="text-xl font-bold mb-4 text-center">Edit Recipe</h3>
-            <form onSubmit={handleEditSubmit} className="space-y-4">
+            <h3 className="text-2xl font-semibold mb-6 text-center text-green-700">
+              Edit Recipe
+            </h3>
+            <form onSubmit={handleEditSubmit} className="space-y-5">
               <input
                 type="text"
                 name="title"
                 placeholder="Title"
                 value={editingRecipe.title}
                 onChange={handleEditChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 required
               />
               <input
@@ -175,7 +179,7 @@ const MyDishes = () => {
                 placeholder="Ingredients (comma-separated)"
                 value={editingRecipe.ingredients}
                 onChange={handleEditChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 required
               />
               <textarea
@@ -183,7 +187,7 @@ const MyDishes = () => {
                 placeholder="Instructions"
                 value={editingRecipe.instructions}
                 onChange={handleEditChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 required
               />
               <input
@@ -192,7 +196,7 @@ const MyDishes = () => {
                 placeholder="Category"
                 value={editingRecipe.category}
                 onChange={handleEditChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 required
               />
               <input
@@ -201,7 +205,7 @@ const MyDishes = () => {
                 placeholder="Image URL"
                 value={editingRecipe.image}
                 onChange={handleEditChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
               <input
                 type="number"
@@ -209,7 +213,7 @@ const MyDishes = () => {
                 placeholder="Total Calories"
                 value={editingRecipe.totalCalories}
                 onChange={handleEditChange}
-                className="w-full border px-3 py-2 rounded"
+                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 required
               />
               <div className="grid grid-cols-2 gap-4">
@@ -221,21 +225,21 @@ const MyDishes = () => {
                     placeholder={`${nutrient.charAt(0).toUpperCase() + nutrient.slice(1)} (g)`}
                     value={editingRecipe.nutrients?.[nutrient] || ""}
                     onChange={handleEditChange}
-                    className="border px-3 py-2 rounded"
+                    className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 ))}
               </div>
-              <div className="flex justify-end gap-3 mt-4">
+              <div className="flex justify-end gap-4 mt-6">
                 <button
                   type="button"
                   onClick={handleCancelEdit}
-                  className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg text-md font-medium transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-md font-medium transition"
                 >
                   Save Changes
                 </button>
@@ -246,45 +250,41 @@ const MyDishes = () => {
       )}
 
       {/* Recipe List */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 ">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
           <div
             key={recipe._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden "
+            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105"
           >
             <img
               src={recipe.image || "https://via.placeholder.com/300"}
               alt={recipe.title}
-              className="w-full h-80 object-cover"
+              className="w-full h-60 object-cover"
             />
-            <div className="p-4 space-y-2">
-              <h3 className="text-xl font-semibold text-green-700">
+            <div className="p-6 space-y-4">
+              <h3 className="text-xl font-semibold text-green-800">
                 {recipe.title}
               </h3>
-              <p className="text-gray-600 text-sm">
-                Category: {recipe.category}
-              </p>
-              <p className="text-gray-700 text-sm">
-                Total Calories: {recipe.totalCalories} kcal
-              </p>
-              <div className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600">Category: {recipe.category}</p>
+              <p className="text-sm text-gray-700">Calories: {recipe.totalCalories} kcal</p>
+              <div className="text-sm text-gray-600 space-y-1">
                 <p>Protein: {recipe.nutrients?.protein}g</p>
                 <p>Carbs: {recipe.nutrients?.carbs}g</p>
                 <p>Fat: {recipe.nutrients?.fat}g</p>
                 <p>Fiber: {recipe.nutrients?.fiber}g</p>
               </div>
-              <div className="flex gap-3 mt-3">
+              <div className="flex gap-3 mt-4">
                 <button
                   onClick={() => handleEditClick(recipe)}
-                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-1 rounded"
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
                 >
-                  Edit
+                  <FaEdit /> Edit
                 </button>
                 <button
                   onClick={() => handleDelete(recipe._id)}
-                  className="flex-1 bg-red-500 hover:bg-red-600 text-white py-1 rounded"
+                  className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
                 >
-                  Delete
+                  <FaTrashAlt /> Delete
                 </button>
               </div>
             </div>

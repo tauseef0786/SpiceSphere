@@ -78,7 +78,11 @@ const Recipes = () => {
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Newly Added Dishes</h2>
 
         {loading ? (
-          <p className="text-center text-gray-500">Loading recipes...</p>
+          <div className="loader-container">
+            {/* Circular Loader */}
+            <div className="loader"></div>
+            <p className="loader-text">Loading recipes...</p>
+          </div>
         ) : otherRecipes.length === 0 ? (
           <p className="text-center text-red-500">No recipes found.</p>
         ) : (
