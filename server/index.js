@@ -12,8 +12,11 @@ const app=express();
 app.use(express.json());
 connectDB();
 
-
-app.use(cors());
+const corsOptions = {
+  origin: '*',  // Allow any origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+};
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
     res.send("Welcome to the Recipe API");
